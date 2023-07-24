@@ -29,7 +29,17 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         Options.ExpireTimeSpan = TimeSpan.FromMinutes(15);  //Se cierrra la sesion en 15 min
 
     });
-
+//Borrar cache de la sesion
+builder.Services.AddControllersWithViews(Options =>
+{
+    Options.Filters.Add(
+        new ResponseCacheAttribute
+        {
+            NoStore = true, 
+            Location = ResponseCacheLocation.None,
+        }
+        );
+});
 
 
 
